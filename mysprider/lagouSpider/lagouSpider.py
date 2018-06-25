@@ -8,7 +8,7 @@ import json
 import requests
 from pymongo import MongoClient
 import MySQLdb as mdb
-from fake_useragent import UserAgent
+from .fake_useragent import UserAgent
 
 def save_to_mogodb(posithon_data):
     client = MongoClient()
