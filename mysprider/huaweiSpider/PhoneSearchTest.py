@@ -2,81 +2,111 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-import re
 from pyquery import PyQuery
-import MySQLdb as mdb
+import MySQLdb
 import traceback
-
-driver = webdriver.Chrome()
-driver.get('https://www.baidu.com')
-# wait = WebDriverWait(driver, 10)
-
-elem =driver.find_element_by_xpath('//*[@id="kw"]')
-elem.send_keys("手机商城", Keys.ENTER)
-# wait = WebDriverWait(driver, 3000)
-driver.implicitly_wait(30) # 隐性等待，最长等30秒
-# print(driver.page_source)
-# html = driver.page_source
-# '//*[@id="5"]/div/div[2]/div[2]/a[1]'
-#\35 > div > div.c-span18.c-span-last > div.f13 > a.c-showurl
-# //*[@id="3"]/div/div[2]/div[2]/a[1]
-# pattern = re.compile('.*?华为商城官网.*?http://(.*?)}">', re.S)
-# re.findall(pattern, html)
-# //*[@id="5"]/div/div[2]/div[2]/a[1]
-url2 = driver.find_element_by_xpath('//*[@id="5"]/div/div[2]/div[2]/a[1]').text
-# url2 = driver.find_element_by_xpath('//*[@id="3"]/div/div[2]/div[2]/a[1]')
-# driver2 = webdriver.Chrome()
-# wait = wait.until(url2)
-elem = driver.get(url2)
-# elem = driver.find_element_by_xpath('//*[@id="zxnav_0"]/div[1]/a[1]/span')
-elem = driver.find_element_by_xpath('//*[@id="4"]/div/div[2]/div[2]/a[1]')
-elem.click()
-# currentHandle = driver.getWindowHandles()
-# driver.switchTo().window(currentHandle)
-handles = driver.window_handles
-for handle in handles:     # 切换窗口（切换到搜狗）
-    if handle != driver.current_window_handle:
-        # print('switch to', handle)
-        driver.switch_to.window(handle)
-        # print(driver.current_window_handle)    # 输出当前窗口句柄（搜狗）
-        break
-# driver.switch_to.window(handles[1])
-
-html = driver.page_source
-doc = PyQuery(html)
-# doc('#pro-list clearfix')
-items = doc('.pro-list .pro-panels').items()
-try:
-    conn = mdb.connect(host='127.0.0.1', port=3306, user='root', passwd='123456', db='test2', charset='utf8')
-    cursor = conn.cursor()
-    for item in items:
-        # print(item.text())
-        # print('===title====' + item('.p-img').children().attr('title'))
-        # print('===src====='+item('.p-img').children().children().attr('src'))
-        title = item('.p-img').children().attr('title')
-        price = item('.p-price').children().text()
-        img = item('.p-img').children().children().attr('src')
-        name = item('.p-name').children().attr('title')
-        detailhref = 'https://www.vmall.com' + item('.p-name').children().attr('href')
-        comment = item('.p-button-score').children().text()
-        values = (title, price, img, name, detailhref, comment)
-        # cursor.executemany('INSERT INTO vmall(title,price,img,name,detailhref,comment) values('+title+','+price+','+img+','+name+','+detailhref+','+comment+')')
-        cursor.execute('INSERT INTO vmall(title,price,img,name,detailhref,comment) values(%s,%s,%s,%s,%s,%s)', values)
-        conn.commit()
-except:
-    traceback.print_exc()
-    # 发生错误时会滚
-    conn.rollback()
-finally:
-    # 关闭游标连接
-    cursor.close()
-    # 关闭数据库连接
-    conn.close()
-    driver.quit()
+import re
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.common.exceptions import TimeoutException
 
 
+# 进入华为官网商城
+def get_page(driver):
+    elem = driver.find_element_by_xpath('//*[@id="kw"]')
+    elem.send_keys("手机商城", Keys.ENTER)
+    driver.implicitly_wait(30)  # 隐性等待，最长等30秒
+    url2 = 'https://www.vmall.com'
+    driver.get(url2)
+    elem = driver.find_element_by_xpath('//*[@id="zxnav_0"]/div[1]/div/a/span')
+    elem.click()
+    handles = driver.window_handles  # 获得所有窗口句柄
+    handle = handles[len(handles)-1]  # 获得最后一个窗口句柄
+    driver.switch_to_window(handle)  # 切换到最后一个窗口
+    return driver
 
 
+# 翻页
+def next_page(driver):
+    try:
+        wait = WebDriverWait(driver, 10)  # 设置等待
+        site = ec.element_to_be_clickable((By.CSS_SELECTOR, '#page_ul > li.pgNext.link.next'))  # 找到下一页按钮
+        submit = wait.until(site)
+        submit.click()
+        return driver
+    except TimeoutException:
+        print('异常了')
 
 
+# 进入产品页
+def get_product(driver, code):
+    elem = driver.find_element_by_xpath('//*[@id="zxnav_{}"]/a/span'.format(code))
+    elem.click()
+    handles = driver.window_handles  # 获得所有窗口句柄
+    handle = handles[len(handles)-1]  # 获得最后一个窗口句柄
+    driver.switch_to_window(handle)  # 切换到最后一个窗口
+    return driver
+
+
+# 解析产品详情页面，并保存到数据库
+def parse_page(driver):
+    html = driver.page_source
+    doc = PyQuery(html)
+    items = doc('.pro-list .pro-panels').items()  # 定位到产品详情
+    # 连接数据库
+    con = MySQLdb.connect(host='127.0.0.1', port=3306, user='root', passwd='123456', db='test2', charset='utf8')
+    cur = con.cursor()
+    try:
+        for item in items:
+            title = item('.p-img').children().attr('title')
+            price = item('.p-price').children().text()
+            img = item('.p-img').children().children().attr('src')
+            name = item('.p-name').children().attr('title')
+            href = 'https://www.vmall.com' + item('.p-name').children().attr('href')
+            phone_id = ''.join(re.compile('product/(.*?).html', re.S).findall(href))
+            comment = item('.p-button-score').children().text()
+            value = (title, price, img, name, href, phone_id, comment)
+            sql = "SELECT COUNT(*) FROM vmall WHERE phone_id = '%s'"  # 查询数据库是否存在数据
+            cur.execute(sql % phone_id)
+            result = cur.fetchone()[0]
+            if result > 0:
+                print('此型号手机已经存在！')
+                # sql = "update vmall set name = 'lqp'"
+            else:
+                # 添加数据到数据库
+                sql = 'INSERT INTO vmall(title,price,img,name,detailhref,phone_id,comment) values(%s,%s,%s,%s,%s,%s,%s)'
+                cur.execute(sql, value)
+                con.commit()
+                print(name+phone_id+'//添加成功')
+    except():
+        traceback.print_exc()
+        # 发生错误时会滚
+        con.rollback()
+    finally:
+        # 关闭游标连接
+        cur.close()
+        # 关闭数据库连接
+        con.close()
+
+
+def main():
+    driver = webdriver.Chrome()
+    driver.get('https://www.baidu.com')
+    driver = get_page(driver)
+    for code in range(0, 5):
+        driver = get_product(driver, code)
+        if code in range(2, 3):
+            parse_page(driver)
+        else:
+            parse_page(driver)
+            # 获得最大页数
+            total = int(driver.find_element_by_xpath('//*[@id="pageTotal"]').get_attribute('value'))
+            for page in range(1, total):
+                driver = next_page(driver)
+                parse_page(driver)
+    driver.quit()  # 退出浏览器
+
+
+if __name__ == '__main__':
+    main()
