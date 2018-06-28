@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>login</title>
+<link href="/static/css/main.css" rel="stylesheet" type="text/css">
+<link href="/static/css/style-login.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="header">
+		<!--<a id="logo" href="/index/"><img src="/static/images/logo.png" alt=""/><img id="img_logoname" src="/static/images/logoname.png" alt=""/></a>-->
+		<table class="tb_nav">
+			<tr>
+				<td class="td_left" width="180px">
+					<a id="logo" href="/index/"><img src="/static/images/logo.png" alt=""/><img id="img_logoname" src="/static/images/logoname.png" alt=""/></a>
+				</td>
+				<td class="td_left"><span class="header_nav">| 登录</span></td>
+				<!--<td class="td_middle">
+					<ul id="menu">
+						<li class="active"><a href="/index/">首页</a></li>
+						<li><a href="/about/">关于</a></li>
+						
+					</ul>
+				</td>
+				<td class="td_right">
+					<a id="login" href="/#">登录/注册</a>
+				</td>-->
+			</tr>
+		</table>	
+	</div>
+	<div id="content_login">
+		<form action="#" name="login" class="login">
+			<div id="login_box">
+				<label for="inp_username">用户名：</label>
+				<input id="inp_username" class="input_area" type="text" tabindex="1" autofocus="autofocus" />			
+				<label for="inp_password">密码：</label>
+				<input id="inp_password" class="input_area" type="password" tabindex="2" />
+				<p align="right" style="margin: -15px 24px 24px 0"><a href="/#">忘记密码</a></p>
+				<p align="center" id="tips" style="color: #f00; font-size: 16px; visibility: collapse; margin: 0 24px 8px 24px;">此处为错误信息提示</p>
+				<input id="bt_login" type="submit" value="登录" tabindex="3" />
+				<p align="center" style="margin: 16px 0px 48px 0;color: #b4adad;font-size: 16px;">还没有账号？立即<a href="/register/">注册</a></p>
+				<hr/>
+				<div align="center">
+					<span style="color: #747373">其他登录方式：</span>
+					<a href="/#"><img class="img_communicate" src="/static/images/icon_wechat.png" alt=""></a>
+					<a href="/#"><img class="img_communicate" src="/static/images/icon_QQ.png" alt=""></a>
+					<a href="/#"><img class="img_communicate" src="/static/images/icon_weibo.png" alt=""></a>
+				</div>
+			</div>
+		</form>
+		<br class="spacer" />
+	</div>
+	
+	<div id="footer">
+		<div class="content_footer">
+			<ul>
+				<li><a href="/index/">流浪猫窝首页</a></li>
+				<li><a href="/#">用户反馈</a></li>
+				<li><a href="/about/">联系我们</a></li>			
+			</ul>
+			<p>©Bringing Stray Cat Home 2018.</p>
+		</div>
+	</div>
+</body>
+</html>

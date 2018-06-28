@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+       <form action="/index1/" method="post">
+        {% csrf_token %}
+        <input type="text" name="username"/>
+        <input type="password" name="password">
+        <input type="submit" value="提交"/>
+    </form>
+    <hr />
+    <table border="1">
+        <thead>
+            <th>用户名</th>
+            <th>密码</th>
+        </thead>
+
+        <tbody>
+            {% for line in data %}
+                <tr>
+                    <td>{{ line.user }}</td>
+                    <td>{{ line.pwd }}</td>
+                    <td><button type="button" onclick="">修改</button></td>
+                    <td><a href="/deluser/" method="post" id="{{line.user}}"><button>删除</button></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

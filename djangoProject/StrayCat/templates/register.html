@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>register</title>
+<link href="/static/css/main.css" rel="stylesheet" type="text/css">
+<link href="/static/css/style-login.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="header">
+		<!--<a id="logo" href="/index/"><img src="/static/images/logo.png" alt=""/><img id="img_logoname" src="/static/images/logoname.png" alt=""/></a>-->
+		<table class="tb_nav">
+			<tr>
+				<td class="td_left" width="180px">
+					<a id="logo" href="/index/"><img src="/static/images/logo.png" alt=""/><img id="img_logoname" src="/static/images/logoname.png" alt=""/></a>
+				</td>
+				<td class="td_left"><span class="header_nav">| 注册</span></td>
+				<!--<td class="td_middle">
+					<ul id="menu">
+						<li class="active"><a href="/index/">首页</a></li>
+						<li><a href="/about/">关于</a></li>
+						
+					</ul>
+				</td>
+				<td class="td_right">
+					<a id="login" href="/#">登录/注册</a>
+				</td>-->
+			</tr>
+		</table>	
+	</div>
+	<div id="content_login">
+		<div id="register_box" align="center">
+			<table>
+				<tr>
+					<td class="td_right"><label for="inp_username">用户名：</label></td>
+					<td><input id="inp_username" class="input_area2" type="text" tabindex="1" autofocus="autofocus"></td>
+					<td><span style="color:#f00; font-size: 28px">*</span></td>
+					<td><span id="span_userTip"  style="color:#f00;display:none;">此处为错误信息提示</span></td>
+				</tr>
+				<tr>
+					<td class="td_right"><label for="inp_password">密码：</label></td>
+					<td><input id="inp_password" class="input_area2" type="password" tabindex="2"></td>
+					<td><span style="color:#f00; font-size: 28px">*</span></td>
+					<td><span id="span_passwordTip"  style="color:#f00;display:none;">此处为错误信息提示</span></td>
+				</tr>
+				<tr>
+					<td class="td_right"><label for="inp_sex">性别：</label></td>
+					<td style="min-height: 48px">
+						<!--<input type="radio" name="sex" value="女生" class="radio_reg">女生<input type="radio" name="sex" value="男生" class="radio_reg">男生-->
+						<label class="radiolab_sex"><input type="radio" class="radio_sex" name="sex" value="女生" tabindex="3"><span class="radioinput"></span>女生</label>
+						<label class="radiolab_sex"><input type="radio" class="radio_sex" name="sex" value="男生" tabindex="4"><span class="radioinput"></span>男生</label>
+					</td>
+					<td><span style="color:#f00; font-size: 28px">*</span></td>
+					<td><span id="span_sexTip"  style="color:#f00;display:none;">此处为错误信息提示</span></td>
+				</tr>
+				<tr>
+					<td class="td_right"><label for="inp_email">电子邮箱：</label></td>
+					<td><input id="inp_email" type="email" class="input_area2" tabindex="5"></td>
+					<td><span style="color:#f00; font-size: 28px">*</span></td>
+					<td><span id="span_emailTip"  style="color:#f00;display:none;">此处为错误信息提示</span></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input id="bt_login" type="submit" value="注册" tabindex="6" /></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><p align="center" style="margin: 16px 0px 48px 0;color: #b4adad;font-size: 16px;">已注册？立即<a href="/login/">登录</a></p></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+				<!--<label for="inp_username">用户名：</label>
+				<input id="inp_username" class="input_area" type="text" tabindex="1" autofocus="autofocus" />			
+				<label for="inp_password">密码：</label>
+				<input id="inp_password" class="input_area" type="password" tabindex="2" />
+				
+				<p align="center" id="tips" style="color: #f00; font-size: 16px; visibility: collapse; margin: 0 24px 8px 24px">此处为错误信息提示显示区</p>
+				<input id="bt_login" type="submit" value="注册" tabindex="3" />
+				<p align="center" style="margin: 16px 0px 48px 0;color: #b4adad;font-size: 16px;">已注册？立即<a href="/login/">登录</a></p>-->
+			
+				
+		</div>
+		<br class="spacer" />
+	</div>
+	
+	<div id="footer">
+		<div class="content_footer">
+			<ul>
+				<li><a href="/index/">流浪猫窝首页</a></li>
+				<li><a href="/#">用户反馈</a></li>
+				<li><a href="/about/">联系我们</a></li>			
+			</ul>
+			<p>©Bringing Stray Cat Home 2018.</p>
+		</div>
+	</div>
+</body>
+</html>

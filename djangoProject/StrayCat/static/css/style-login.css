@@ -1,0 +1,123 @@
+@charset "utf-8";
+
+#content_login {
+	background: #f8f8f8;
+	padding: 200px 0;
+	overflow: hidden;	
+	position: relative;
+}
+
+#login_box {
+	margin: auto;	
+	width: 400px;
+}
+
+#bt_login {
+	width: 400px;
+	height: 48px;
+	border-radius: 24px;	 
+	border: 0;
+	background: #f19ec2;
+	font-size: 18px;
+	color: #f8f8f8;
+	padding: 0;
+	
+}
+
+#login_box label {
+	color: #747373;
+	font-size: 18px;	
+	margin: 24px 0 8px 24px;
+	text-align: left;
+	 
+}
+
+
+
+.input_area {
+	width: 352px;
+	height: 48px;
+	border-radius: 24px;
+	border: #dfdede 1px solid;
+	color: #4f4d4d;
+	font-size: 18px;
+	padding: 0 24px;
+	margin: 5px 0 20px 0;
+}
+
+
+
+.img_communicate {
+	margin: 0 8px;
+}
+
+#login_box p a {
+	color: #747373;
+}
+
+#login_box p a:hover {
+	color: #12b7f5;
+}
+
+
+
+.input_area2 {
+	width: 352px;
+	height: 48px;
+	border-radius: 24px;
+	border: #dfdede 1px solid;
+	color: #4f4d4d;
+	font-size: 18px;
+	padding: 0 24px;
+	margin: 8px 0;
+}
+
+#register_box table tr td label {
+	color: #747373;
+	font-size: 18px;
+	
+}
+
+
+
+#register_box table tr td p a {
+	color: #747373;
+}
+
+#register_box table tr td p a:hover {
+	color: #12b7f5;
+}
+
+.radiolab_sex {
+	margin: 20px 20px 0 0;
+	display: inline-block；
+}
+
+.radio_sex {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+}
+
+.radioinput {
+	background-color: #fff;
+	border: 1px solid rgba(0,0,0,0.15);
+	border-radius: 100%;
+	display: inline-block;
+	height: 16px;
+	margin-right: 10px;
+	margin-top: -1px;
+	vertical-align: middle;
+	width: 16px;
+	line-height: 1;
+}
+
+.radio_sex:checked + .radioinput:after {
+	background-color: #f19ec2;
+	border-radius: 100%;
+	content: "";
+	display: inline-block;
+	height: 12px;
+	margin: 2px;
+	width: 12px;
+}
+
