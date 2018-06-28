@@ -5,6 +5,7 @@ from urllib.parse import urlencode
 from requests.exceptions import RequestException
 import requests
 
+
 def get_page_index():
     data = {
         'offset': 0,
@@ -25,6 +26,7 @@ def get_page_index():
     except RequestException:
         print('请求详情页面出错', url)
         return None
+
 
 def main():
     html = get_page_index()

@@ -8,12 +8,14 @@ import matplotlib.pyplot as plt
 from scipy.misc import imread
 from wordcloud import WordCloud, ImageColorGenerator
 
+
 def write_txt_file(path, txt):
     '''
     写入txt文本
     '''
     with open(path, 'a', encoding='gb18030', newline='') as f:
         f.write(txt)
+
 
 def read_txt_file(path):
     '''
@@ -22,28 +24,27 @@ def read_txt_file(path):
     with open(path, 'r', encoding='gb18030', newline='') as f:
         return f.read()
 
+
 def login():
     # 初始化机器人，扫码登陆
     bot = Bot()
-
     # 获取所有好友
     my_friends = bot.friends()
-
     print(type(my_friends))
     return my_friends
+
 
 def show_sex_ratio(friends):
     # 使用一个字典统计好友男性和女性的数量
     sex_dict = {'male': 0, 'female': 0}
-
     for friend in friends:
         # 统计性别
         if friend.sex == 1:
             sex_dict['male'] += 1
         elif friend.sex == 2:
             sex_dict['female'] += 1
-
     print(sex_dict)
+
 
 def show_area_distribution(friends):
     # 使用一个字典统计各省好友数量
@@ -67,6 +68,7 @@ def show_area_distribution(friends):
         data.append({'name': key, 'value': value})
 
     print(data)
+
 
 def show_signature(friends):
     # 统计签名
@@ -121,11 +123,13 @@ def show_signature(friends):
     plt.axis("off")
     plt.show()
 
+
 def main():
     friends = login()
     show_sex_ratio(friends)
     show_area_distribution(friends)
     show_signature(friends)
+
 
 if __name__ == '__main__':
     main()

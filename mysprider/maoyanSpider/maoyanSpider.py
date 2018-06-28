@@ -19,21 +19,11 @@ def get_one_page(url):
         return None
 
 def parse_one_page(html):
-    # str1= '<dd>.*?board-index.*?>(\d+)</i>.*?board-img.*?src="(.*?)"</a>.*?<a.*?>(.*?)</a>.*?star">(.*?)</p>.*?releasetime">(.*?)integer">(.*?)</i>.*?fraction">(.*?)</i>.*?</dd></p>.*?'
-    # pattern = re.compile('<dd>.*?board-index.*?>(\d+)</i>.*?board-img.*?src="(.*?)"</a>.*?name"><a.*?>(.*?)</a>.*?star">(.*?)</p>.*?releasetime">(.*?)integer">(.*?)</i>.*?fraction">(.*?)</i>.*?</dd></p>.*?', re.S)
-
-    # pattern = re.compile('<dd>.*?board-index.*?>(\d+)</i>.*?board-img.*?src="(.*?)"</a>.*?name"><a'
-    #                      + '.*?>(.*?)</a>.*?star">(.*?)</p>.*?releasetime">(.*?)</p>'
-    #                      + '.*?integer">(.*?)</i>.*?fraction">(.*?)</i>.*?</dd>', re.S)
-
-    pattern = re.compile('<dd>.*?board-index.*?>(\d+)</i>.*?name"><a.*?>(.*?)</a>.*?star">(.*?)</p>.*?releasetime">(.*?)</p>.*?integer">(.*?)</i>.*?fraction">(.*?)</i>.*?</dd>', re.S)
-    # re.findall('<dd>.*?board-index.*?>(\d+)</i>.*?data-src="(.*?)".*?name"><a.*?>(.*?)</a>.*?star">(.*?)</p>.*?releasetime">(.*?)</p>.*?integer">(.*?)</i>.*?fraction">(.*?)</i>.*?</dd>',html, re.S)
-
     # \d 等价于 [0-9]
     # \d+ 表示至少一个数字，
     # .* 代表匹配除换行符之外的所有字符。
     # .*?  代表非贪婪模式，也就是说只匹配符合条件的最少字符
-    # pattern = re.compile('<dd>.*?board-index.*?>(\d+)</i>')
+    pattern = re.compile('<dd>.*?board-index.*?>(\d+)</i>.*?name"><a.*?>(.*?)</a>.*?star">(.*?)</p>.*?releasetime">(.*?)</p>.*?integer">(.*?)</i>.*?fraction">(.*?)</i>.*?</dd>', re.S)
     items = re.findall(pattern, html)
     print(type(items))
     print(items[0])

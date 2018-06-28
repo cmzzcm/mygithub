@@ -42,13 +42,6 @@ def main():
         'Referer': 'https://www.lagou.com/jobs/list_python?labelWords=&fromSearch=true&suginput=',
         # 'X-Requested-With': 'XMLHttpRequest',
     }
-    # # 设置post参数
-    # page_num = 1
-    # keywords ='python'
-    # page_data = urllib.parse.urlencode([
-    #     ('pn', page_num),
-    #     ('kd', keywords)
-    # ])
     pn = 18
     kd = 'python'
     for i in pn:

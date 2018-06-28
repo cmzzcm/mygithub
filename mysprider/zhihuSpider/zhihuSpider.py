@@ -5,6 +5,7 @@ import requests
 import pandas as pd
 import time
 
+
 def get_user_data(page):
     user_data = []
     headers = {
@@ -20,8 +21,8 @@ def get_user_data(page):
         time.sleep(5)
     return user_data
 
+
 if __name__ == '__main__':
     user_data = get_user_data(10)
     df = pd.DataFrame.from_dict(user_data)
     df.to_excel('zhihu.xlsx')
-    # f = open('zhihu.xlsx', 'r')

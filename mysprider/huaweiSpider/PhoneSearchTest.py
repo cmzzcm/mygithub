@@ -37,6 +37,7 @@ def next_page(driver):
         return driver
     except TimeoutException:
         print('异常了')
+        return None
 
 
 # 进入产品页
@@ -83,15 +84,17 @@ def parse_page(driver):
         traceback.print_exc()
         # 发生错误时会滚
         con.rollback()
+        return None
     finally:
         # 关闭游标连接
         cur.close()
         # 关闭数据库连接
         con.close()
+        return None
 
 
 def main():
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome()  # 打开goole浏览器
     driver.get('https://www.baidu.com')
     driver = get_page(driver)
     for code in range(0, 5):
@@ -103,9 +106,10 @@ def main():
             # 获得最大页数
             total = int(driver.find_element_by_xpath('//*[@id="pageTotal"]').get_attribute('value'))
             for page in range(1, total):
-                driver = next_page(driver)
+                driver = next_page(driver)   #翻页
                 parse_page(driver)
     driver.quit()  # 退出浏览器
+    return None
 
 
 if __name__ == '__main__':

@@ -8,8 +8,11 @@ from selenium.common.exceptions import TimeoutException
 from pyquery import PyQuery as pq
 import re
 
+
 browser = webdriver.Chrome()
 wait = WebDriverWait(browser, 10)
+
+
 # 进入淘宝网，输入鞋子，返回页面
 def search():
     try:
@@ -23,6 +26,8 @@ def search():
         return total.text
     except TimeoutException:
         return search()
+
+
 # 跳转到下一页
 def next_page(page_number):
     try:
@@ -32,17 +37,16 @@ def next_page(page_number):
         input.send_keys(page_number)
         submit.click()
         wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR, '#mainsrp-pager > div > div > div > ul > li.item.active > span'),str(page_number)))
-        # mainsrp-pager > div > div > div > ul > li.item.next > a > span:nth-child(1)
         get_products()
     except TimeoutException:
         next_page(page_number)
-# 得到淘宝商品信息
 
+
+# 得到淘宝商品信息
 def get_products():
     wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#mainsrp-itemlist .items .item')))
     html = browser.page_source
     doc = pq(html)
-    # pyquery（browser.page_source）就相当于requests.get获取的内容
     items = doc('#mainsrp-itemlist .items .item').items()
 
     for item in items:
@@ -56,11 +60,12 @@ def get_products():
         }
         print(product)
 
+
 def main():
     total = search()
     total = int(re.compile('(\d+)').search(total).group(1))
     # 爬取所有的数据用total+1
-    for i in range(2, 10):
+    for i in range(2, total):
         next_page(i)
 
 
