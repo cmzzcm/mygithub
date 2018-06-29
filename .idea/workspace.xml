@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="069e51f6-dc75-4d43-84d2-42fc986d453b" name="Default" comment="" />
+    <list default="true" id="7ff321d5-9456-4995-b3aa-205926a9e59d" name="Default" comment="" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,16 +10,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <created>1525526704268</created>
+      <created>1530238254554</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1525526704268</updated>
+      <updated>1530238254554</updated>
     </task>
     <servers />
   </component>
